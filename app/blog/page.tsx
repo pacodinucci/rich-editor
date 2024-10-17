@@ -1,6 +1,12 @@
 import Link from "next/link";
 import prisma from "@/lib/prisma";
-import { Post } from "@prisma/client";
+
+interface Post {
+  id: string;
+  slug: string;
+  title: string;
+  createdAt: Date;
+}
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +17,7 @@ export default async function Blogs() {
     },
   });
 
-  if (!posts) {
+  if (!posts || posts.length === 0) {
     return <div>No posts found.</div>;
   }
 
